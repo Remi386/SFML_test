@@ -142,6 +142,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="DrawUnit.cpp" />
+    <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="GameLoop.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
