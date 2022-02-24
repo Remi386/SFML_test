@@ -6,6 +6,7 @@
 int main() {
 
     sf::RenderWindow window(sf::VideoMode(ScreenWidth, ScreenHeight), "Sneak");
+    window.setFramerateLimit(FPS);
 
     while (window.isOpen())
     {
