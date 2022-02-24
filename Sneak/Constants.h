@@ -15,14 +15,22 @@ constexpr int32_t CellHeight = 4;
 
 constexpr int32_t FieldWidth = (RightBoundary - LeftBoundary) / CellWidth;
 constexpr int32_t FieldHeight = (LowerBoundary - UpperBoundary) / CellHeight;
+constexpr uint32_t fieldSize = FieldHeight * FieldWidth;
 
 constexpr uint32_t FPS = 30;
+constexpr uint32_t FontSize = 24;
 
 enum class mKey
 {
 	MoveUp,
 	MoveRight,
 	MoveDown,
-	MoveLeft
+	MoveLeft,
+	Nothing
 };
 
+enum class GameChars : uint8_t {
+	Void,
+	Sneak,
+	LittleBonus
+};

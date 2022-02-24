@@ -2,11 +2,13 @@
 #include "Constants.h"
 #include <SFML/Graphics.hpp>
 
-
 int main() {
 
     sf::RenderWindow window(sf::VideoMode(ScreenWidth, ScreenHeight), "Sneak");
     window.setFramerateLimit(FPS);
+    if (window.isOpen()) {
+        WaitPlayerAction(window);
+    }
 
     while (window.isOpen())
     {

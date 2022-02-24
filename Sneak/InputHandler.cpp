@@ -3,7 +3,7 @@
 
 mKey HandleInput()
 {
-	static mKey CacheKey = mKey::MoveRight;
+	static mKey CacheKey = mKey::Nothing;
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
@@ -26,5 +26,4 @@ mKey HandleInput()
 	}
 
 	return CacheKey;
-
 }
