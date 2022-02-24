@@ -1,1 +1,16 @@
-﻿
+﻿  DrawUnit.cpp
+C:\Users\Scio\source\repos\Sneak\Sneak\DrawUnit.cpp(13,78): warning C4244: 'argument': conversion from 'int32_t' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\Scio\source\repos\Sneak\Sneak\DrawUnit.cpp(13,47): warning C4244: 'argument': conversion from 'int32_t' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  GameLoop.cpp
+  InputHandler.cpp
+  main.cpp
+  Generating Code...
+  Sneak.vcxproj -> C:\Users\Scio\source\repos\Sneak\x64\Debug\Sneak.exe
