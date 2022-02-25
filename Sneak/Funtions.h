@@ -3,14 +3,16 @@
 #include <SFML/Graphics.hpp>
 #include "Constants.h"
 
-void Play(sf::RenderWindow&);
+bool Play(sf::RenderWindow& window);
 
-void drawField(sf::RenderWindow&, std::vector<GameChars>&);
+void drawField(sf::RenderWindow&, std::vector<GameChars>& );
 
 mKey HandleInput();
 
-void WaitPlayerAction(sf::RenderWindow&);
+void WaitPlayerAction(sf::RenderWindow& window);
 
-void EndGame(sf::RenderWindow& window);
+void EndGame(sf::RenderWindow&, uint16_t);
 
-void GenerateBonuses(sf::RenderWindow& window, std::vector<GameChars>&);
+void GenerateBonus(sf::RenderWindow& window, std::vector<GameChars>& gameField);
+
+void drawScore(sf::RenderWindow& window, uint16_t score);

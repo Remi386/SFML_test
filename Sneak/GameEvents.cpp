@@ -3,10 +3,11 @@
 #include <random>
 
 sf::Font font;
-extern uint32_t score = 0;
 
 std::mt19937 mersenne(1234664);
 std::uniform_int_distribution<> pos_dist(0, fieldSize - 1);
+
+void WaitKeyPressed(sf::RenderWindow& window);
 
 void SetText(sf::RenderWindow& window, std::string str) {
 	window.clear(sf::Color::Black);
@@ -23,7 +24,26 @@ void WaitPlayerAction(sf::RenderWindow& window) {
 	
 	font.loadFromFile("ayar.ttf");
 	SetText(window, "Press any key to\n start the game");
+	WaitKeyPressed(window);
+}
 
+void EndGame(sf::RenderWindow& window, uint16_t score) {
+	SetText(window, "Game over!\nScore: " + std::to_string(score));
+	WaitKeyPressed(window);
+}
+
+void GenerateBonus(sf::RenderWindow& window, std::vector<GameChars>& gameField) {
+	uint16_t position;
+	do {
+		position = pos_dist(mersenne);
+
+	} while ( position < FieldWidth 
+		|| position % FieldWidth == 0 
+		|| position % FieldWidth == FieldWidth - 1);
+	gameField[position] = GameChars::LittleBonus;
+}
+
+void WaitKeyPressed(sf::RenderWindow& window) {
 	sf::Event ev;
 	while (true) {
 		window.waitEvent(ev);
@@ -34,12 +54,4 @@ void WaitPlayerAction(sf::RenderWindow& window) {
 		if (ev.type == sf::Event::Closed)
 			window.close();
 	}
-}
-
-void EndGame(sf::RenderWindow& window) {
-	SetText(window, "Game over!\nScore: " + std::to_string(score));
-}
-
-void GenerateBonuses(sf::RenderWindow& window, std::vector<GameChars>& gameField) {
-	gameField[pos_dist(mersenne)] = GameChars::LittleBonus;
 }
