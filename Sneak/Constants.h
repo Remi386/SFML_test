@@ -4,12 +4,12 @@
 constexpr int32_t ScreenWidth = 400;
 constexpr int32_t ScreenHeight = 400;
 
-//Boundaries 32for game field
+//Boundaries for game field
 constexpr int32_t LeftBoundary = 50;
 constexpr int32_t RightBoundary = 350;
 constexpr int32_t UpperBoundary = 50;
 constexpr int32_t LowerBoundary = 350;
-//Game unit i32n real pixels
+//Game unit in real pixels
 constexpr int32_t CellWidth = 10;
 constexpr int32_t CellHeight = 10;
 

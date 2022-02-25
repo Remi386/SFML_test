@@ -23,8 +23,11 @@ int main() {
 
         // clear the window with black color
         window.clear(sf::Color::Black);
-        Play(window);
+        bool EndGame = Play(window);
         window.display();
+
+        if (EndGame)
+            break;
     }
 	return 0;
 }
