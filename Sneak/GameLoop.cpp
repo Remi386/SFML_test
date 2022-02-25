@@ -6,7 +6,7 @@
 #include <cstdint>
 
 std::list<uint16_t> sneak { (fieldSize / 2), ((fieldSize / 2) - 1)};
-std::vector<GameChars> gameField(fieldSize);
+std::vector<GameChars> gameField(fieldSize + 1);
 extern uint32_t score;
 
 bool canGo(sf::RenderWindow& window, int16_t dist);
@@ -33,8 +33,8 @@ void Play(sf::RenderWindow& window)
 		distance = -1;
 		break;
 	case mKey::Nothing:
-		distance = 0;
-		break;
+		drawField(window, gameField);
+		return;
 	}
 	
 	if (canGo(window, distance)) 
@@ -54,33 +54,29 @@ bool canGo(sf::RenderWindow& window, int16_t dist) {
 }
 
 void moveSneak(sf::RenderWindow& window, int16_t dist) {
-	auto tail = sneak.back();
-	gameField[tail] = GameChars::Void;
 
-	auto head = sneak.front();
+	auto prev = sneak.front();
+
+	auto& head = sneak.front();
 	head += dist;
 
 	if (head < FieldWidth)
 		head += FieldWidth * (FieldHeight - 1);
 
-	if (head > FieldWidth * (FieldHeight - 1))
+	if (head > FieldWidth * (FieldHeight))
 		head %=  FieldWidth;
 
 	if (head % FieldWidth == 0)
-		head += FieldWidth;
+		head += FieldWidth - 2;
 
 	if (head % FieldWidth == FieldWidth - 1)
-		head -= FieldWidth;
+		head -= FieldWidth - 2;
 
-	auto prev = sneak.begin();
+	gameField[head] = GameChars::Sneak;
+	gameField[sneak.back()] = GameChars::Void;
+
 	for (auto iter = std::next(sneak.begin()); iter != sneak.end(); ++iter) {
-		*iter = *prev;
-		++prev;
-	}
-	*prev = head;
-
-	for (auto a : sneak) {
-		gameField[a] = GameChars::Sneak;
+		std::swap(*iter, prev);
 	}
 	
 }
