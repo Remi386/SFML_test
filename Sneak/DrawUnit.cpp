@@ -16,11 +16,8 @@ void drawField(sf::RenderWindow& window, std::vector<GameChars>& field) {
 			switch (field[i * FieldWidth + j])
 			{
 			case GameChars::Boundary:
-				cell.setFillColor(sf::Color::Green);
-				break;
 			case GameChars::Void:
-				cell.setFillColor(sf::Color(200, 200, 200)); //Grey
-				break;
+				continue;
 			case GameChars::Sneak:
 				cell.setFillColor(sf::Color::White);
 				break;
