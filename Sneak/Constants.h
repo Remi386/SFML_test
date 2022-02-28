@@ -32,5 +32,6 @@ enum class mKey
 enum class GameChars : uint8_t {
 	Void,
 	Sneak,
+	Boundary,
 	LittleBonus
 };

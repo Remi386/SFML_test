@@ -15,8 +15,11 @@ void drawField(sf::RenderWindow& window, std::vector<GameChars>& field) {
 			cell.setPosition(sf::Vector2f(LeftBoundary + j * CellWidth, UpperBoundary + i * CellHeight));
 			switch (field[i * FieldWidth + j])
 			{
+			case GameChars::Boundary:
+				cell.setFillColor(sf::Color::Green);
+				break;
 			case GameChars::Void:
-				cell.setFillColor(sf::Color::Black);
+				cell.setFillColor(sf::Color(200, 200, 200)); //Grey
 				break;
 			case GameChars::Sneak:
 				cell.setFillColor(sf::Color::White);
@@ -35,8 +38,8 @@ void drawBoundaries(sf::RenderWindow& window) {
 	static sf::Vertex boundaries[5] = {
 		sf::Vector2f(LeftBoundary + CellWidth, UpperBoundary + CellHeight),
 		sf::Vector2f(RightBoundary - CellWidth, UpperBoundary + CellHeight),
-		sf::Vector2f(RightBoundary - CellWidth, LowerBoundary),
-		sf::Vector2f(LeftBoundary + CellWidth, LowerBoundary),
+		sf::Vector2f(RightBoundary - CellWidth, LowerBoundary - CellHeight),
+		sf::Vector2f(LeftBoundary + CellWidth, LowerBoundary - CellHeight),
 		sf::Vector2f(LeftBoundary + CellWidth, UpperBoundary + CellHeight)
 	};
 	window.draw(boundaries, 5, sf::PrimitiveType::LinesStrip);

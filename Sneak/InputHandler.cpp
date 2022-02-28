@@ -1,6 +1,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include "Constants.h"
 
+
 mKey HandleInput()
 {
 	static mKey CacheKey = mKey::Nothing;

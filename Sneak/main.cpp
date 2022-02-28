@@ -1,13 +1,16 @@
-#include "Funtions.h"
 #include "Constants.h"
 #include <SFML/Graphics.hpp>
+
+bool Play(sf::RenderWindow&);
+void PrepareGame(sf::RenderWindow&);
 
 int main() {
 
     sf::RenderWindow window(sf::VideoMode(ScreenWidth, ScreenHeight), "Sneak");
     window.setFramerateLimit(FPS);
+
     if (window.isOpen()) {
-        WaitPlayerAction(window);
+        PrepareGame(window);
     }
 
     while (window.isOpen())
