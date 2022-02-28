@@ -1,15 +1,24 @@
-#include "Funtions.h"
 #include "Constants.h"
 #include "SFML/Graphics.hpp"
 #include <list>
 #include <vector>
 #include <cstdint>
 
+//Create sneak in the middle of field
 std::list<uint16_t> sneak { (fieldSize / 2) + (FieldWidth / 2),
 							((fieldSize / 2) + (FieldWidth / 2) - 1) };
-std::vector<GameChars> gameField(fieldSize + 1);
+std::vector<GameChars> gameField(fieldSize);
 uint32_t score = 0;
 
+//external functions
+void drawField(sf::RenderWindow&, std::vector<GameChars>&);
+mKey HandleInput();
+void WaitPlayerAction(sf::RenderWindow& window);
+void EndGame(sf::RenderWindow&, uint16_t);
+void GenerateBonus(sf::RenderWindow& window, std::vector<GameChars>& gameField);
+void drawScore(sf::RenderWindow& window, uint16_t score);
+
+//iternal functions
 bool canGo(sf::RenderWindow& window, int16_t dist);
 bool moveSneak(sf::RenderWindow& window, mKey key);
 void checkBoundaries(uint16_t& head, mKey key);
@@ -37,7 +46,7 @@ bool Play(sf::RenderWindow& window)
 	static uint8_t frameCounter = 0;
 
 	++frameCounter;
-	if (frameCounter == 5) {
+	if (frameCounter == FPS * 2) {
 		frameCounter = 0;
 		GenerateBonus(window, gameField);
 	}
@@ -115,7 +124,6 @@ void checkBoundaries(uint16_t& head, mKey key)
 			break;
 		}
 	}
-		
 }
 
 uint16_t CalculateDist(sf::RenderWindow& window, mKey key) {
@@ -142,5 +150,6 @@ uint16_t CalculateDist(sf::RenderWindow& window, mKey key) {
 
 	if (canGo(window, distance))
 		oldDistance = distance;
+
 	return oldDistance;
 }

@@ -9,4 +9,9 @@ C:\Users\Scio\source\repos\Sneak\Sneak\DrawUnit.cpp(15,47): warning C4244: 'argu
           [
               T=float
           ]
+  GameEvents.cpp
+  GameLoop.cpp
+  InputHandler.cpp
+  main.cpp
+  Generating Code...
   Sneak.vcxproj -> C:\Users\Scio\source\repos\Sneak\x64\Debug\Sneak.exe
