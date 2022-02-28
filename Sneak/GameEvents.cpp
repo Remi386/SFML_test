@@ -15,7 +15,6 @@ void SetText(sf::RenderWindow& window, std::string str) {
 	sf::Text text(str, font, FontSize);
 	text.setPosition(sf::Vector2f((RightBoundary - LeftBoundary) / 3,
 		(LowerBoundary - UpperBoundary) / 2));
-
 	window.draw(text);
 	window.display();
 }
@@ -37,9 +36,9 @@ void GenerateBonus(sf::RenderWindow& window, std::vector<GameChars>& gameField) 
 	do {
 		position = pos_dist(mersenne);
 
-	} while ( position < FieldWidth 
-		|| position % FieldWidth == 0 
-		|| position % FieldWidth == FieldWidth - 1);
+	} while (gameField[position] == GameChars::Boundary
+			|| gameField[position] == GameChars::Sneak);
+
 	gameField[position] = GameChars::LittleBonus;
 }
 
