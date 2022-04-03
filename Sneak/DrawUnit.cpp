@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
-#include "Constants.h"
 #include <vector>
+#include "Constants.h"
 
 extern sf::Font font;
 void drawBoundaries(sf::RenderWindow& window);
 
-void drawField(sf::RenderWindow& window, std::vector<GameChars>& field) {
+void drawField(sf::RenderWindow& window, std::vector<GameChars>& field) 
+{
 	
 	sf::RectangleShape cell;
 	cell.setSize(sf::Vector2f(CellWidth, CellHeight));
@@ -16,14 +17,27 @@ void drawField(sf::RenderWindow& window, std::vector<GameChars>& field) {
 			switch (field[i * FieldWidth + j])
 			{
 			case GameChars::Boundary:
+				#ifdef _DEBUG
+				cell.setFillColor(sf::Color::Green);
+				break;
+				#endif
+
 			case GameChars::Void:
+				#ifdef _DEBUG
+				cell.setFillColor(sf::Color(150, 150, 150));
+				break;
+				#else
 				continue;
+				#endif
+
 			case GameChars::Sneak:
 				cell.setFillColor(sf::Color::White);
 				break;
 			case GameChars::LittleBonus:
 				cell.setFillColor(sf::Color::Red);
 				break;
+			default:
+				continue;
 			}
 			window.draw(cell);
 		}
@@ -31,7 +45,8 @@ void drawField(sf::RenderWindow& window, std::vector<GameChars>& field) {
 	drawBoundaries(window);
 }
 
-void drawBoundaries(sf::RenderWindow& window) {
+void drawBoundaries(sf::RenderWindow& window) 
+{
 	static sf::Vertex boundaries[5] = {
 		sf::Vector2f(LeftBoundary + CellWidth, UpperBoundary + CellHeight),
 		sf::Vector2f(RightBoundary - CellWidth, UpperBoundary + CellHeight),
@@ -42,7 +57,8 @@ void drawBoundaries(sf::RenderWindow& window) {
 	window.draw(boundaries, 5, sf::PrimitiveType::LinesStrip);
 }
 
-void drawScore(sf::RenderWindow& window, uint16_t score) {
+void drawScore(sf::RenderWindow& window, uint16_t score) 
+{
 
 	sf::Text text("Score: " + std::to_string(score), font, FontSize);
 	text.setPosition(sf::Vector2f((ScreenWidth) / 3, 0));

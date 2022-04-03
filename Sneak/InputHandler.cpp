@@ -1,29 +1,32 @@
 #include <SFML/Window/Keyboard.hpp>
 #include "Constants.h"
 
-
 mKey HandleInput()
 {
 	static mKey CacheKey = mKey::Nothing;
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		CacheKey = mKey::MoveUp;
+		if(CacheKey != mKey::MoveDown)
+			CacheKey = mKey::MoveUp;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		CacheKey = mKey::MoveRight;
+		if (CacheKey != mKey::MoveLeft)
+			CacheKey = mKey::MoveRight;
 	}
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		CacheKey = mKey::MoveDown;
+		if (CacheKey != mKey::MoveUp)
+			CacheKey = mKey::MoveDown;
 	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-		CacheKey = mKey::MoveLeft;
+		if (CacheKey != mKey::MoveRight)
+			CacheKey = mKey::MoveLeft;
 	}
 
 	return CacheKey;

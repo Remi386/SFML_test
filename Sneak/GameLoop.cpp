@@ -1,30 +1,34 @@
-#include "Constants.h"
-#include "SFML/Graphics.hpp"
 #include <list>
 #include <vector>
 #include <cstdint>
+#include <SFML/Graphics.hpp>
+#include "Constants.h"
+#include "BigBonusHandler.h"
 
 //Create sneak in the middle of field
-std::list<uint16_t> sneak { (fieldSize / 2) + (FieldWidth / 2),
-							((fieldSize / 2) + (FieldWidth / 2) - 1) };
-std::vector<GameChars> gameField(fieldSize);
-uint32_t score = 0;
+namespace {
+	std::list<uint16_t> sneak{ (fieldSize / 2) + (FieldWidth / 2),
+								((fieldSize / 2) + (FieldWidth / 2) - 1) };
+	std::vector<GameChars> gameField(fieldSize);
+	uint32_t score = 0;
+	BigBonus bigBonus;
+}
 
 //external functions
 void drawField(sf::RenderWindow&, std::vector<GameChars>&);
 mKey HandleInput();
 void WaitPlayerAction(sf::RenderWindow& window);
 void EndGame(sf::RenderWindow&, uint16_t);
-void GenerateBonus(sf::RenderWindow& window, std::vector<GameChars>& gameField);
+void GenerateLittleBonus(sf::RenderWindow& window, std::vector<GameChars>& gameField);
 void drawScore(sf::RenderWindow& window, uint16_t score);
 
 //iternal functions
-bool canGo(sf::RenderWindow& window, int16_t dist);
 bool moveSneak(sf::RenderWindow& window, mKey key);
 void checkBoundaries(uint16_t& head, mKey key);
 uint16_t CalculateDist(sf::RenderWindow& window, mKey key);
 
-void PrepareGame(sf::RenderWindow& window) {
+void PrepareGame(sf::RenderWindow& window) 
+{
 	//Create upper and lower boundaries
 	for (int i = 0; i < FieldWidth; ++i) {
 		gameField[i] = GameChars::Boundary;
@@ -43,30 +47,32 @@ bool Play(sf::RenderWindow& window)
 {
 	mKey key = HandleInput();
 	
-	static uint8_t frameCounter = 0;
+	static uint16_t frameCounter = 0;
 
 	++frameCounter;
 	if (frameCounter == FPS * 2) {
 		frameCounter = 0;
-		GenerateBonus(window, gameField);
+		GenerateLittleBonus(window, gameField);
 	}
 
 	if (moveSneak(window, key))
 		return true;
+
+	bigBonus.Update(window, gameField);
 	
 	drawField(window, gameField);
 	drawScore(window, score);
 	return false;
 }
 
-// Moving to inside the sneak in not allowed
-bool canGo(sf::RenderWindow& window, int16_t dist) 
+void AddTail(int count = 1)
 {
-	auto x = sneak.begin();
-	auto first = *x;
-	auto second = *(++x);
-
-	return first + dist != second;
+	auto tail = sneak.back();
+	auto prev = std::prev(sneak.end(), 2);
+	for (int i = 0; i < count; ++i) {
+		sneak.push_back(tail + (tail - *prev));
+		tail++; prev++;
+	}
 }
 
 bool moveSneak(sf::RenderWindow& window, mKey key)
@@ -82,16 +88,24 @@ bool moveSneak(sf::RenderWindow& window, mKey key)
 
 	gameField[sneak.back()] = GameChars::Void;
 
-	if (gameField[head] == GameChars::Sneak) {
+	switch (gameField[head])
+	{
+	case GameChars::Sneak:
 		EndGame(window, score);
 		return true;
-	}
 
-	if (gameField[head] == GameChars::LittleBonus) {
+	case GameChars::LittleBonus:
 		score += 100;
-		auto tail = sneak.back();
-		auto prev = std::prev(sneak.end(), 2);
-		sneak.push_back(tail + (tail - *prev));
+		AddTail();
+		break;
+
+	case GameChars::BigBonus:
+		score += 500;
+		bigBonus.DeleteBonus(gameField);
+		AddTail(3);
+		break;
+	default:
+		break;
 	}
 
 	gameField[head] = GameChars::Sneak;
@@ -120,13 +134,14 @@ void checkBoundaries(uint16_t& head, mKey key)
 			head += FieldWidth - 2;
 			break;
 		case mKey::Nothing:
-			std::terminate();
+			throw std::runtime_error("Wrong input in a game loop");
 			break;
 		}
 	}
 }
 
-uint16_t CalculateDist(sf::RenderWindow& window, mKey key) {
+uint16_t CalculateDist(sf::RenderWindow& window, mKey key) 
+{
 	static int16_t oldDistance = 0;
 	int16_t distance = 0;
 
@@ -148,8 +163,7 @@ uint16_t CalculateDist(sf::RenderWindow& window, mKey key) {
 		return 0;
 	}
 
-	if (canGo(window, distance))
-		oldDistance = distance;
+	oldDistance = distance;
 
 	return oldDistance;
 }

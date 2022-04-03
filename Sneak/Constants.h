@@ -1,26 +1,26 @@
 #pragma once
 #include <cstdint>
 
-constexpr int32_t ScreenWidth = 400;
-constexpr int32_t ScreenHeight = 400;
+inline constexpr int32_t ScreenWidth = 400;
+inline constexpr int32_t ScreenHeight = 400;
 
-constexpr int32_t offsetFromScreen = 50;
+inline constexpr int32_t offsetFromScreen = 50;
 
 //Boundaries for game field
-constexpr int32_t LeftBoundary = offsetFromScreen;
-constexpr int32_t RightBoundary = ScreenWidth - offsetFromScreen;
-constexpr int32_t UpperBoundary = offsetFromScreen;
-constexpr int32_t LowerBoundary = ScreenHeight - offsetFromScreen;
+inline constexpr int32_t LeftBoundary = offsetFromScreen;
+inline constexpr int32_t RightBoundary = ScreenWidth - offsetFromScreen;
+inline constexpr int32_t UpperBoundary = offsetFromScreen;
+inline constexpr int32_t LowerBoundary = ScreenHeight - offsetFromScreen;
 //Game unit in real pixels
-constexpr int32_t CellWidth = 10;
-constexpr int32_t CellHeight = 10;
+inline constexpr int32_t CellWidth = 10;
+inline constexpr int32_t CellHeight = 10;
 
-constexpr int32_t FieldWidth = (RightBoundary - LeftBoundary) / CellWidth;
-constexpr int32_t FieldHeight = (LowerBoundary - UpperBoundary) / CellHeight;
-constexpr uint32_t fieldSize = FieldHeight * FieldWidth;
+inline constexpr int32_t FieldWidth = (RightBoundary - LeftBoundary) / CellWidth;
+inline constexpr int32_t FieldHeight = (LowerBoundary - UpperBoundary) / CellHeight;
+inline constexpr uint32_t fieldSize = FieldHeight * FieldWidth;
 
-constexpr uint8_t FPS = 15;
-constexpr uint32_t FontSize = 24;
+inline constexpr uint16_t FPS = 15;
+inline constexpr uint32_t FontSize = 24;
 
 enum class mKey
 {
@@ -35,5 +35,6 @@ enum class GameChars : uint8_t {
 	Void,
 	Sneak,
 	Boundary,
-	LittleBonus
+	LittleBonus,
+	BigBonus
 };
