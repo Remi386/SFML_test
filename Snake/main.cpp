@@ -1,12 +1,10 @@
-#include "Constants.h"
 #include <SFML/Graphics.hpp>
-
-bool Play(sf::RenderWindow&);
-void PrepareGame(sf::RenderWindow&);
+#include "Constants.h"
+#include "GameLoop.h"
 
 int main() {
 
-    sf::RenderWindow window(sf::VideoMode(ScreenWidth, ScreenHeight), "Sneak");
+    sf::RenderWindow window(sf::VideoMode(ScreenWidth, ScreenHeight), "Snake");
     window.setFramerateLimit(FPS);
 
     if (window.isOpen()) {

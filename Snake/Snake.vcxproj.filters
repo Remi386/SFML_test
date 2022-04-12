@@ -30,12 +30,27 @@
     <ClCompile Include="GameEvents.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="BonusesHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BigBonusHandler.h">
+    <ClInclude Include="BonusesHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEvents.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DrawUnit.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLoop.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

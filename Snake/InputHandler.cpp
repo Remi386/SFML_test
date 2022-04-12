@@ -1,5 +1,4 @@
-#include <SFML/Window/Keyboard.hpp>
-#include "Constants.h"
+#include "InputHandler.h"
 
 mKey HandleInput()
 {
@@ -10,20 +9,17 @@ mKey HandleInput()
 		if(CacheKey != mKey::MoveDown)
 			CacheKey = mKey::MoveUp;
 	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		if (CacheKey != mKey::MoveLeft)
 			CacheKey = mKey::MoveRight;
 	}
-	
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		if (CacheKey != mKey::MoveUp)
 			CacheKey = mKey::MoveDown;
 	}
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		if (CacheKey != mKey::MoveRight)
 			CacheKey = mKey::MoveLeft;

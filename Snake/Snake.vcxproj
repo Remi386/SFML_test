@@ -21,9 +21,10 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{668667fc-3bde-44c0-b94f-a04bc537b95b}</ProjectGuid>
-    <RootNamespace>Sneak</RootNamespace>
+    <ProjectGuid>{F78A1F8F-7BDD-4C76-9B93-C6359C171ADF}</ProjectGuid>
+    <RootNamespace>Snake</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Snake</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -141,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BonusesHandler.cpp" />
     <ClCompile Include="DrawUnit.cpp" />
     <ClCompile Include="GameEvents.cpp" />
     <ClCompile Include="GameLoop.cpp" />
@@ -148,8 +150,12 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BigBonusHandler.h" />
+    <ClInclude Include="BonusesHandler.h" />
     <ClInclude Include="Constants.h" />
+    <ClInclude Include="DrawUnit.h" />
+    <ClInclude Include="GameEvents.h" />
+    <ClInclude Include="GameLoop.h" />
+    <ClInclude Include="InputHandler.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
